@@ -17,7 +17,7 @@ abstract Class Vehiculo{
     function getMarca(){return $this->marca}
     function getModelo(){return $this->modelo;}
     function getMatricula(){return $this->matricula;}
-    function getPrecioDia(){return $this->precioDia;}
+    function getPrecioDia(){return $this->prec  ioDia;}
 
     abstract function calcularAlquiler($dias){return $this->getPrecioDia * $dias;}
 }

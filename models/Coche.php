@@ -1,5 +1,5 @@
 <?php
-class Coche{
+class Coche extends Vehiculo{
     private $numeroPuertas;
     private $tipoCombustible;
 

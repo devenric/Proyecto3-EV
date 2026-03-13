@@ -1,5 +1,5 @@
 <?php
-class Motocicleta{
+class Motocicleta extends Vehiculo{
     private $cilindrada;
     private $incluyeCasco;
 function __construct($marca, $modelo, $matricula, $precioDia, $id, $cilindrada, $incluyeCasco){
