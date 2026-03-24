@@ -6,7 +6,7 @@ abstract Class Vehiculo{
     protected $matricula;
     protected $precioDia;
 
-    function __construct($marca, $modelo, $matricula, $precioDia, $id=0){
+    function __construct($marca, $modelo, $matricula, $precioDia, $id){
         $this->marca = $marca;
         $this->modelo = $modelo;
         $this->matricula = $matricula;
@@ -14,10 +14,19 @@ abstract Class Vehiculo{
         $this->id = $id;
     }
     function getId(){return $this->id;}
-    function getMarca(){return $this->marca}
+    function getMarca(){return $this->marca;}
     function getModelo(){return $this->modelo;}
     function getMatricula(){return $this->matricula;}
-    function getPrecioDia(){return $this->prec  ioDia;}
+    function getPrecioDia(){return $this->precioDia;}
 
-    abstract function calcularAlquiler($dias){return $this->getPrecioDia * $dias;}
+    function calcularAlquiler($dias){return $this->getPrecioDia * $dias;}
+    public function toArray() {
+        return [
+            "id" => $this->id,
+            "marca" => $this->marca,
+            "modelo" => $this->modelo,
+            "matricula" => $this->matricula,
+            "precioDia" => $this->precioDia,
+        ];
+    }
 }
