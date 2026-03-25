@@ -6,7 +6,7 @@ abstract Class Vehiculo{
     protected $matricula;
     protected $precioDia;
 
-    function __construct($marca, $modelo, $matricula, $precioDia, $id){
+    function __construct($marca, $modelo, $matricula, $precioDia, $id=0){
         $this->marca = $marca;
         $this->modelo = $modelo;
         $this->matricula = $matricula;

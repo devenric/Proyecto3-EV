@@ -35,5 +35,11 @@ function login(){
     }
     include "views/login.php";
 }
-    function logout(){}
+    function logout(){
+        $_SESSION = [];
+        session_destroy();
+
+        header("Location: index.php?accion=login");
+        exit;
+    }
 }

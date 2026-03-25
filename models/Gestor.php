@@ -9,20 +9,42 @@ class Gestor extends Connection{
         $sql = 'SELECT * from vehiculo';
         $resultado = $this->conexion->query($sql);
         while($value = $resultado->fetch(PDO::FETCH_ASSOC)){
-            if ($_POST['numPuertas'] === null && $_POST['tipoCombustible'] === null) {
+            $vehiculo = null;
+            if ($value['numPuertas'] === null && $value['tipoCombustible'] === null) {
                 $vehiculo = new Motocicleta($value['marca'], $value['modelo'],$value['matricula'], $value['precioDia'], $value['cilindrada'], $value['incluyeCasco']);
             }
-            elseif ($_POST['cilindrada'] && $_POST['incluyeCasco'] === null) {
+            else{
                 $vehiculo = new Coche($value['marca'], $value['modelo'],$value['matricula'], $value['precioDia'],$value['numPuertas'], $value['tipoCombustible']);
             }
+            $objeto = $vehiculo;
+            $listado[] = $objeto;
         }
-        $listado[] = $vehiculo;
+        
         return $listado;
     }
     function crear($vehiculo){
-        $sql = "INSERT INTO vehiculo (marca, modelo, matricula, precioDia) VALUES (:marca, :modelo, :matricula, :precioDia)";
+        if ($vehiculo instanceof Coche) {
+            $sql = "INSERT INTO vehiculo (marca, modelo, matricula, precioDia, numPuertas, tipoCombustible) VALUES (:marca, :modelo, :matricula, :precioDia, :numPuertas, :tipoCombustible)";
+        }
+        elseif ($vehiculo instanceof Motocicleta) {
+            $sql = "INSERT INTO vehiculo (marca, modelo, matricula, precioDia, cilindrada, incluyeCasco) VALUES (:marca, :modelo, :matricula, :precioDia, :cilindrada, :incluyeCasco)";
+
+        }
         $resultado = $this->conexion->prepare($sql);
         $resultado->bindValue(':marca', $vehiculo->getMarca());
+        $resultado->bindValue(':modelo', $vehiculo->getModelo());
+        $resultado->bindValue(':matricula', $vehiculo->getMatricula());
+        $resultado->bindValue(':precioDia', $vehiculo->getprecioDia());
+        if ($vehiculo instanceof Coche) {
+        $resultado->bindValue(':numPuertas', $vehiculo->getNumPuertas());
+        $resultado->bindValue(':tipoCombustible', $vehiculo->getTipoCombustible());
+        }
+        elseif ($vehiculo instanceof Motocicleta) {
+        $resultado->bindValue(':cilindrada', $vehiculo->getCilindrada());
+        $resultado->bindValue(':incluyeCasco', $vehiculo->getIncluyeCasco());
+        }
+        
+        return $resultado->execute();
     }
     function buscar(){}
     function editar(){}

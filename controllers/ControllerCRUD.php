@@ -13,24 +13,24 @@ class ControllerCRUD{
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $id = uniqid();
             $marca= $_POST['marca'];
-            $modelo= $_POST['modelos'];
+            $modelo= $_POST['modelo'];
             $matricula= $_POST['matricula'];
             $precioDia= $_POST['precioDia'];
             $numPuertas= $_POST['numPuertas'];
             $tipoCombustible= $_POST['tipoCombustible'];
-            $cilindrada= $_POST['cilincrada'];
+            $cilindrada= $_POST['cilindrada'];
             $incluyeCasco= $_POST['incluyeCasco'];
-        }
-            if ($cilindrada && $incluyeCasco instanceof Motocicleta) {
+            if (isset($cilindrada) && isset($incluyeCasco) instanceof Motocicleta) {
                 $vehiculo = new Motocicleta($marca,$modelo,$matricula,$precioDia,$cilindrada,$incluyeCasco, $id=0);
             }
-            elseif($numPuertas && $tipoCombustible){
+            else{
                 $vehiculo = new Coche($marca,$modelo,$matricula,$precioDia,$numPuertas,$tipoCombustible, $id=0);
             }
             $this->gestor->crear($vehiculo);
             
             header("Location: index.php");
             exit;
+        }
             
     include "views/crear.php";
         

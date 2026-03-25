@@ -5,8 +5,8 @@
 </head>
 <body>
    <div style="background-color: #f0f0f0; padding: 10px; margin-bottom: 20px;">
-       <?php if (isset($_SESSION['usuario_id'])): ?>
-          Bienvenido, <b><?= $_SESSION['usuario_email'] ?></b> |
+       <?php if (isset($_SESSION['usuarioId'])): ?>
+          Bienvenido, <b><?= $_SESSION['usuarioEmail'] ?></b> |
            <a href="index.php?accion=logout">Cerrar Sesión</a>
        <?php else: ?>
            <a href="index.php?accion=login">Iniciar Sesión</a> | 
